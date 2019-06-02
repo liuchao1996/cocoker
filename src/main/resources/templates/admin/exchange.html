@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+    <style>
+        .curPage {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUri='exchange.html')"></div>
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                已提列表
+                <!--<small>订单列表</small>-->
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">已提列表</a></li>
+            </ol>
+
+        </div>
+        <div id="page-inner">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Messages
+                        </div>
+                        <!--table-->
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            id
+                                        </th>
+                                        <th>
+                                            姓名
+                                        </th>
+                                        <th>
+                                            提现金额
+                                        </th>
+                                        <th>
+                                            openId(是微信openid不是提现openid)
+                                        </th>
+                                        <th>
+                                            提现时间
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="exchange : ${exchangeList}">
+                                        <th>[[${exchange.tId}]]</th>
+                                        <th>[[${exchange.tNickname}]]</th>
+                                        <th>[[${exchange.tMoney}]]</th>
+                                        <th>[[${exchange.tOpenid}]]</th>
+                                        <th>[[${exchange.createTime}]]</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix pull-right">
+                        <div class="col-md-12 column">
+                            <ul class="pagination">
+                                <li>
+                                    <a th:href="@{'/admin/exchange?page=' +${exchangeList.getNumber()-1}}">Prev</a>
+                                </li>
+                                <li>
+                                    <!--th:class="${pages.getNumber() == i}? 'curPage' :'' "-->
+                                    <a th:href="@{'/admin/exchange?page=' + ${i} + '&size=10'}"
+                                       th:each="i :${#numbers.sequence(0, exchangeList.getTotalPages()-1)}" th:text="${i} +1"
+                                       th:class="${exchangeList.getNumber() == i}? 'curPage' :'' "></a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{'/admin/exchange?page=' +${exchangeList.getNumber()+1}}">Prev</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--提示-->
+            <div class="panel-body">
+                <div class="alert alert-success">
+                    <strong>Well done!</strong> You successfully read this important alert message.
+                </div>
+                <div class="alert alert-info">
+                    <strong>Heads up!</strong> This alert needs your attention, but it's not super
+                    important.
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <footer>
+
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+   
+</script>
+
+</body>
+</html>

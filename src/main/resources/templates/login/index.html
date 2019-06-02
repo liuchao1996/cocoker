@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>login</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"  href="css/style.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/body.css}" href="css/body.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}"/>
+</head>
+<body>
+<div class="container">
+	<section id="content">
+		<form action="/cocoker/admin/toLogin" method="post">
+			<h1>会员登录</h1>
+			<div>
+				<input type="text" name="username" placeholder="账号" required="" id="username" />
+			</div>
+			<div>
+				<input type="password" name="pwd" placeholder="密码" required="" id="password" />
+			</div>
+			 <div class="">
+				<span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>			</div> 
+			<div>
+				<!-- <input type="submit" value="Log in" /> -->
+				<input type="submit" value="登录" class="btn btn-primary" id="js-btn-login"/>
+				<a href="#">忘记密码?</a>
+				<!-- <a href="#">Register</a> -->
+			</div>
+		</form><!-- form -->
+		 <div class="button">
+			<span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>
+		</div> <!-- button -->
+	</section><!-- content -->
+</div>
+<!-- container -->
+</body>
+</html>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+    <style>
+        .curPage {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUri='empty.html')"></div>
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                查询用户详情
+                <!--<small>This is your UI elements section</small>-->
+            </h1>
+            <!--<ol class="breadcrumb">-->
+            <!--<li><a href="#"></a></li>-->
+            <!--</ol>-->
+
+        </div>
+        <div id="page-inner">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            修改
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>请输入用户id和金额 ，注意 是修改余额 不是在原有的基础上相加</strong>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="输入ID" type="text" class="form-control" id="uid"/>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="输入金额" type="text" class="form-control" id="umoney"/>
+                    </div>
+                    </form>
+                    <button class="btn btn-success cmt">提交</button>
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function () {
+        $('.cmt').click(function () {
+            if ($('#uid').val() == '') {
+                popup({type: 'error', msg: "请输入id", delay: 1000, bg: true, clickDomCancel: true});
+                return;
+            }
+            if ($('#umoney').val() == '') {
+                popup({type: 'error', msg: "请输入金额", delay: 1000, bg: true, clickDomCancel: true});
+                return;
+            }
+            $.ajax({
+                url: "/cocoker/admin/operation/editMoney",
+                type: "POST",
+                data: {"umoney": $('#umoney').val(), "uid": $('#uid').val()},
+                success: function (result) {
+                    if (result.code == 0) {
+                        popup({type: 'success', msg: "操作成功", delay: 1000});
+                    } else {
+                        popup({type: 'error', msg: result.msg, delay: 1000, bg: true, clickDomCancel: true});
+                    }
+                },
+                error: function (result) {
+                    alert('没找到用户');
+                }
+            })
+        });
+
+    });
+</script>
+
+</body>
+</html>

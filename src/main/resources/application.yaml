@@ -1,0 +1,57 @@
+server:
+  servlet:
+    context-path: /cocoker
+  port: 80
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    username: root
+    password: 111
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cocoker?characterEncoding=utf-8&useSSL=false&useUnicode=true&serverTimezone=GMT%2b8
+#    盐值
+jasypt:
+  encryptor:
+    password: 26BA51F910C2F0E17658269214C51DF7
+
+#    url: jdbc:mysql://67.216.193.93:3306/huaibei?characterEncoding=utf-8&useSSL=false
+  jackson:
+    default-property-inclusion: NON_NULL
+#  jpa:
+#    show-sql: true
+
+wechat:
+#  mpAppId: wx8b238ae9286d8bb4
+#  mpAppSecret: 38edd7f6622961c7cc8765d4910f2379
+#  mpAppId: wx680b8c9999a557d3
+#  mpAppSecret: 1411f8069ef85c13baa59725a5c60b04
+  mpAppId: wxe229644d478a9d18
+  mpAppSecret: 08ab8de3c66829736cb0ff76d8cadc5c
+#  openAppId:
+#  openAppSecret:
+#  mchId: 1244448802
+#  mchKey: xxx
+#  keyPath: xxx
+#  notifyUrl:
+#  customeridY: 100954
+#  customerKey: j3S26ElTnPGpmgPPHEGufMMgr2fbJd6T
+#  notifyurlY: http://3sr5uj.top/cocoker/transaction/notifyurl
+#  returnurlY: http://3sr5uj.top/cocoker/transaction/returnurl
+#  payUrl: http://mc.hx988.cn/submitorder
+  customeridY: 2019050111095458073843
+  customerKey: de775cbe3a2c4758b4cb8c435975b74e
+  notifyurlY: http://3sr5uj.top/cocoker/transaction/notifyurl
+  returnurlY: http://3sr5uj.top/cocoker/transaction/returnurl
+  payUrl: http://www.koulingfa.com/api/uni/pay
+
+projecturl:
+  oauth2buildAuthorizationUrl: http://xf7w5e.top
+  returnUrl: http://3sr5uj.top
+  qrUrl: http://xf7w5e.top
+  zeroMoney: http://jfcms12.com/jieru.php
+  zeroMoneyUID: 2871
+  zeroMoneyKey: a15756098721b
+#logging:
+#  level:
+#    com.cocoker.service.impl: trace

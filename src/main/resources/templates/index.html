@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/icons-extra.css}" href="/cocoker/css/icons-extra.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link th:href="@{/dialog2/css/component.css}" href="css/component.css" rel="stylesheet">
+
+    <style>
+        /** { touch-action: none; }*/
+        * {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #asd {
+            font-size: 10px !important;
+        }
+
+        .blackcolor {
+            color: black;
+        }
+
+        .skin {
+            margin-top: 25px;
+            background-color: #181818;
+        }
+
+        .headerdiv {
+            /*line-height: 70px;*/
+        }
+
+        .titleft {
+            position: absolute;
+        }
+
+        .titright {
+            float: right;
+            margin-right: 20px;
+            padding-top: 23px;
+        }
+
+        /*头部通知*/
+        .dynamicContext, .bg26 {
+            background-color: rgba(26, 26, 26, 1);
+            margin: 0;
+            padding-left: 12px;
+        }
+
+        /*新按钮*/
+        /*.newbtn {*/
+        /*background-color: #000;*/
+        /*width: 40%;*/
+        /*height: 40px;*/
+        /*line-height: 20px;*/
+        /*text-align: center;*/
+        /*padding: 0;*/
+        /*}*/
+
+        .newbtnparent {
+            text-align: center;
+        }
+
+        .newbtnparent > button > img {
+            height: 12px;
+            width: 12px;
+            margin-right: 10px;
+        }
+
+        .newbtn:first-child {
+            border: 1px solid green;
+            color: green;
+            margin-right: 5%;
+        }
+
+        .newbtn:last-child {
+            border: 1px solid red;
+            color: red;
+            margin-left: 5%;
+        }
+
+        .newfooter > img {
+            width: 24px;
+            height: 24px;
+            margin-top: 3px;
+        }
+
+        .newfooter > p {
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            margin: 3px 0 3px 0;
+        }
+
+        /*交易周期*/
+        .jycycle {
+            width: 100%;
+            text-align: center;
+        }
+
+        /*表订单*/
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .fff {
+            color: #fff !important;
+        }
+
+        .newdd {
+            text-align: left;
+            background-color: rgba(26, 26, 26, 1);
+            color: #f5b323;
+            margin-bottom: 0;
+            margin-top: 10px;
+            padding: 5px 0 5px 15px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table tr td {
+            border-width: 1px;
+            border-color: transparent;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        table tr td:first-child {
+            padding-left: 10px;
+        }
+
+        table tr td:last-child {
+            padding-right: 10px;
+        }
+
+        .tableimg {
+            height: 25px;
+            width: 25px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .sy, .recharge > img, .exchange > img {
+            height: 25px;
+            width: 25px;
+        }
+
+        .mui-table-view-cell:after {
+            left: 0;
+        }
+
+        /*充值*/
+        .goumoney {
+            width: 80%;
+            height: 300px;
+            position: absolute;
+            top: 14%;
+            left: 10%;
+            background: rgba(19, 21, 24, 1);
+            z-index: 1;
+            display: none;
+        }
+
+        .goumoneyp {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .goumoneyp:after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background-color: #000;
+            box-shadow: 1px 1px 2px #999;
+        }
+
+        .gnext {
+            margin-left: 10%;
+            margin-top: 7%;
+        }
+
+        .closex {
+            float: right;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+            right: 11px;
+        }
+
+        .btndiv button {
+            background-color: rgba(38, 38, 38, 1);
+            color: #fff;
+            width: 22%;
+            height: 40px;
+            margin-top: 3px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .mui-grid-view.mui-grid-9 {
+            border: none;
+        }
+
+        .mui-table-view:after {
+            height: 0;
+        }
+
+        .entry:after {
+            height: 1px !important;
+        }
+
+        #recharge, #exchange {
+            background-color: rgba(255, 207, 52, 0.99);
+            border: 0px;
+            padding: 0;
+            border-radius: 5px;
+            height: 35px;
+            line-height: 15px;
+        }
+
+        #recharge {
+            margin-right: 5%;
+        }
+
+        #exchange {
+            margin-left: 5%;
+        }
+
+        .pore1 {
+            width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            position: relative;
+            top: 18px;
+        }
+
+        .pore2 {
+            position: relative;
+            top: 20px;
+        }
+
+        #marqueeBox > div {
+            width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            position: relative;
+        }
+
+        .jietu, .proxy {
+            background-color: rgba(255, 255, 255, .1);
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .skin:before, .jietu:after {
+            height: 0;
+        }
+
+        .tg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 255, 255, .2);
+            width: 36%;
+            height: 70px;
+        }
+
+        /*.yongjin:after{*/
+        /*height:0;*/
+        /*}*/
+        /*.mui-table-view:before,.mui-table-view:before{*/
+        /*height:0;*/
+        /*}*/
+        /*自定*/
+        .black {
+            background-color: #000 !important;
+        }
+
+        .c000 {
+            color: #000 !important
+        }
+
+        .cfff {
+            color: #fff !important
+        }
+
+        .mt0 {
+            margin-top: 0;
+        }
+
+        .mt10 {
+            margin-top: 10px;
+        }
+
+        .ml10 {
+            margin-left: 10px;
+        }
+
+        .mr10 {
+            margin-right: 10px;
+        }
+
+        .fsik {
+            /*background: url("images/newimg/sign-bg.png");*/
+            background-color: #181818;
+            box-shadow: 1px 1px 3px #fff;
+        }
+
+        .dblock {
+            display: inline-block;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .vb {
+            vertical-align: bottom;
+        }
+
+        .wd {
+            width: 60%;
+            display: inline-block;
+            float: left;
+            margin-top: 10px;
+        }
+
+        /*弹出框*/
+        .md-content, .md-content h3 {
+            background: rgba(0, 0, 0, .6);
+        }
+
+        .md-content > div > ul > span, .md-content h3 {
+            color: #fff !important;
+        }
+
+        .kclose {
+            color: #fff;
+            background-color: #ca4255;
+            border-color: #000000;
+        }
+
+        .boxs {
+            box-shadow: 1px 1px 30px rgba(255, 255, 255, .6);
+        }
+
+        .skins {
+            background: rgba(255, 255, 255, .1);
+            padding: 0 5%;
+        }
+
+        .carme {
+            background: url("images/newimg/me.png");
+            background-size: 100% 100%;
+            width: 100%;
+            height: 320px;
+            z-index: 999;
+            position: relative;
+            top: -80px;
+        }
+
+        .carme ul li {
+            width: 33.3%;
+        }
+
+        .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .die {
+            width: 0;
+            height: 0;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-top: 10px solid #fff;
+            position: relative;
+            top: 10px;
+            margin-left: 6px;
+        }
+
+        .zhang {
+            width: 0;
+            height: 0;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid #fff;
+            position: relative;
+            bottom: 14px;
+            margin-left: 6px;
+        }
+
+        .kandie {
+            background-color: #4cd964;
+            width: 45%;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 5px;
+            float: left;
+            margin: 0 2.5%;
+        }
+
+        .kanzhang {
+            background-color: #ff275c;
+            width: 45%;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 5px;
+            float: left;
+            margin: 0 2.5%;
+        }
+
+        .kanzhang > p, .kandie > p {
+            font-size: 20px;
+            color: #fff;
+            letter-spacing: 3px;
+        }
+
+        .bd50 {
+            border-radius: 50%;
+        }
+
+        .gul {
+            padding-left: 0;
+        }
+
+        .gul > li {
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px 15px !important;
+            background: #1c1f21 !important;
+            margin-bottom: 5px !important;
+        }
+
+        .gimg {
+            width: 45px !important;
+            height: 45px !important;
+            float: left;
+            border-radius: 10px;
+        }
+
+        .gimgp {
+            line-height: 45px;
+            text-align: left;
+            padding-left: 65px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .gspan {
+            position: absolute;
+            top: 21px;
+            right: 21px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .mui-table-view-cell:after {
+            height: 0;
+        }
+    </style>
+</head>
+
+<body style="background-color: #181818">
+<nav class="mui-bar mui-bar-tab fsik">
+    <a class="mui-tab-item mui-active newfooter" href="#tabbar">
+        <img th:src="@{/images/newimg/home1.png}">
+        <p>交易</p>
+    </a>
+    <a class="mui-tab-item newfooter" href="#tabbar-with-yaoqing">
+        <img th:src="@{/images/newimg/home2.png}">
+        <p>邀请</p>
+    </a>
+    <a class="mui-tab-item newfooter" href="#tabbar-with-chat">
+        <img th:src="@{/images/newimg/home3.png}">
+        <p>战队</p>
+    </a>
+    <a class="mui-tab-item newfooter" href="#tabbar-with-map">
+        <img th:src="@{/images/newimg/home4.png}">
+        <p>个人中心</p>
+    </a>
+</nav>
+<div class="mui-content skin">
+    <div id="tabbar" style="overflow: hidden" class="mui-control-content mui-active">
+        <!--1-->
+        <div class="headerdiv">
+            <!--头像信息金额-->
+            <div class="titleft">
+                <img class="userpic fl">
+                <span class="nickname pore1"></span>
+                <span class="pore2">余额：<span class="money" id="money"></span>$</span>
+            </div>
+
+            <div id="app"></div>
+
+            <div class="titright">
+                <img class="sy fl" onclick="document.getElementById('notice').pause()"
+                     th:src="@{/images/newimg/1.2.jpg}">
+                <div class="recharge fl ml10">
+                    <img th:src="@{/images/newimg/1.4.png}"><span class="vb">购汇</span>
+                </div>
+                <div class="exchange fl ml10">
+                    <img th:src="@{/images/newimg/1.3.png}"><span class="vb">结汇</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 100%;height: 60px;">
+            <div style="height: 50px;width: 21%;  margin: 5px 0px 0px 5px; display: inline-block;float: left">
+                <div style="height: 20px; width: 91%; margin: 2px 0 0 2px;">
+                    $ 美元汇率
+                </div>
+                <div style="height: 20px; width: 91%; margin: 2px 0 0 7px;">
+                    <span id="c1" style="color: red">6.79520</span>
+                </div>
+
+            </div>
+            <div style="height: 50px;width: 24%;  margin: 5px 0px 0px 1px; display: inline-block;float: left">
+                <div style="height: 20px; width: 100%;margin: 2px 0 0 1px; font-size: 10px;">
+                    涨跌值:<span style="color: red"> 0.3261</span>
+                </div>
+                <div style="height: 20px; width: 100%;margin: 2px 0 0 1px; font-size: 10px;">
+                    涨跌幅:<span style="color: red"> 0.3261</span>
+                </div>
+            </div>
+            <div style="height: 50px;width: 26%;  margin: 5px 0px 0px 3px; display: inline-block;float: left">
+                <div style="height: 20px; width: 100%;margin: 2px 0 0 1px; font-size: 10px;">
+                    今开价:<span style="color: red"> 6.68351</span>
+                </div>
+                <div style="height: 20px; width: 100%; margin: 2px 0 0 1px; font-size: 10px;">
+                    昨收价:<span style="color: red"> 6.68351</span>
+                </div>
+            </div>
+            <div style="height: 50px;width: 25%;  margin: 5px 0px 0px 4px; display: inline-block;float: left">
+                <div style="height: 20px; width: 100%; margin: 2px 0 0 1px; font-size: 10px;">
+                    最高价:<span style="color: red"> 6.8201</span>
+                </div>
+                <div style="height: 20px; width: 100%; margin: 2px 0 0 1px; font-size: 10px;">
+                    最低价:<span style="color: red"> 6.6640</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="dynamic">
+            <p class="dynamicContext"></p>
+            <!--<p class="bg26"><span style="margin-bottom: 5px;">在线：<span class="linenum"></span></span></p>-->
+        </div>
+
+        <div id="asd"
+             style="color: #985f0d;font-size: 10px; width: 90%; text-align: center; margin: auto;padding-top: 10px;"><span
+                style="color: #985f0d;font-size: 10px;" id="todaydate"></span> &nbsp;&nbsp;指数来源：官方汇率实时数据》官方客服点击添加
+        </div>
+        <!--购买金额-->
+        <div class="goumoney">
+            <p class="goumoneyp">购买<span class="closex fr">X</span></p>
+
+            <div class="mui-content-padded btndiv gnext">
+                <button type="button" class="btn">10</button>
+                <button type="button" class="btn btn-default">15</button>
+                <button type="button" class="btn btn-default">20</button>
+                <button type="button" class="btn btn-default">25</button>
+                <button type="button" class="btn btn-default">30</button>
+                <button type="button" class="btn btn-default">35</button>
+                <button type="button" class="btn btn-default">50</button>
+                <button type="button" class="btn btn-default">100</button>
+                <button type="button" class="btn btn-default">200</button>
+                <button type="button" class="btn btn-default">300</button>
+                <button type="button" class="btn btn-default">500</button>
+                <button type="button" class="btn btn-default">1000</button>
+
+
+
+
+            </div>
+            <div class="jycycle">
+            <span class="mr10">交易周期:
+                <span class="sec">30</span>S
+            </span>
+
+                <span class="ml10">预计收益:
+                <span class="yjbt">0</span>.00$
+            </span>
+            </div>
+            <button type="button" style="width: 114px;margin-left: 30%;margin-top: 10%;"
+                    class="btn btn-info jyje subBtn">提交订单
+            </button>
+        </div>
+
+        <!--<div id="dynamic" style="height: 25px;margin-top: 7px; font-size:12px;margin-left: 5px;width: 100%;">-->
+        <!--在线：<span class="linenum"></span>-->
+        <!--<img th:src="@{/images/laba.png}" src="../static/images/laba.png"-->
+        <!--<div style="height: 22px; width: 20px;margin-bottom: 8px;"/>-->
+        <!--<span class="dynamicContext"></span>-->
+        <!--</div>-->
+        <!--<div style="height: 28px;font-size: 12px; margin-left: 5px;padding-top: 5px;padding-bottom: 5px;border-top: 1px solid #999;border-bottom: 1px solid #999;">-->
+        <!--<span class=""> &nbsp;&nbsp;&nbsp;&nbsp;在线：<span class="linenum"></span></span>-->
+        <!--</div>-->
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <div id="main" style="width: 100%;height:350px;"></div>
+        <!--echarts end-->
+
+        <!--买涨跌-->
+        <div class="mui-content-padded newbtnparent">
+            <!--<button style="color: red;border: 1PX solid red" type="button" flag="inc" class="newbtn blockm fg">-->
+            <!--<img width="20px;" height="40px" th:src="@{/images/maizhang.png}">-->
+            <!--看涨-->
+            <!--</button>-->
+
+            <!--<img style="width: 45%;height: 43px;" flag="inc" th:src="@{/images/kanzhang.png}" class="blockm fg" src=""-->
+            <!--alt="">-->
+            <!--<img style="width: 45%;height: 40px;" flag="dec" th:src="@{/images/kandie.png}" class="blockm fg" src=""-->
+            <!--alt="">-->
+            <div style="width:100%;display: inline-block;">
+                <div class="kanzhang blockm fg" flag="inc"><p>买涨<span class="zhang"></span></p></div>
+                <div class="kandie blockm fg" flag="dec"><p>买跌<span class="die"></span></p></div>
+            </div>
+            <!--<button style="color: green;border: 1px solid green" type="button" flag="dec" class="newbtn blockm fg">-->
+            <!--<img width="20px;" height="40px" th:src="@{/images/maidie.png}">-->
+            <!--看跌-->
+            <!--</button>-->
+        </div>
+        <!--交易周期-->
+        <div class="jycycle">
+            <span class="mr10">交易周期:
+                <span class="sec">30</span>S
+            </span>
+
+            <span class="ml10">预计收益:
+                <span class="yjbt">0</span>.00$
+            </span>
+        </div>
+        <!--最新订单-->
+        <p><span class="newdd st1" style="float: left;display: inline-block;width: 50%;text-align: center">最新订单</span>
+            <span class="newdd st2" style="float: right;display: inline-block;width: 50%;text-align: center">最新盈利</span>
+        </p>
+        <table id="t1">
+            <tr>
+                <td>用户</td>
+                <td>下单时间</td>
+                <td>方向</td>
+                <!--<td>汇率指数</td>-->
+                <td>金额</td>
+                <!--<td>结果</td>-->
+            </tr>
+
+            <tr th:each=" order : ${ods2}">
+                <td><img class="tableimg" th:src="${order.opic}"></td>
+                <td>[[${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}]]</td>
+                <td th:class="${order.direction =='看涨' ? 'red':'green'}">[[${order.direction}]]</td>
+                <!--<td>[[${order.oindex}]]</td>-->
+                <td>[[${order.money}]]$</td>
+                <!--<td th:class="${order.result =='盈' ? 'red':'green'}">[[${order.result}]]</td>-->
+            </tr>
+        </table>
+
+        <table id="t2" style="display: none">
+            <tr>
+                <td>用户</td>
+                <td>下单时间</td>
+                <td>方向</td>
+                <!--<td>指数</td>-->
+                <td>盈利</td>
+                <!--<td>结果</td>-->
+            </tr>
+
+            <tr th:each=" order : ${ods1}">
+                <td><img class="tableimg" th:src="${order.opic}"></td>
+                <td>[[${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}]]</td>
+                <td th:class="${order.direction =='看涨' ? 'red':'green'}">[[${order.direction}]]</td>
+                <!--<td>[[${order.oindex}]]</td>-->
+                <td>[[${order.money * 2}]]$</td>
+                <!--<td th:class="${order.result =='盈' ? 'red':'green'}">[[${order.result}]]</td>-->
+            </tr>
+        </table>
+    </div>
+
+    <!--  ------- - -- - -- - -- - --- -- -----   ---- -  - - - - --->
+    <div id="tabbar-with-chat" class="mui-control-content skin">
+        <div class="mui-card skin">
+            <div class="mui-card-media" style="padding: 10px;">
+                <!--/images/banner.jpg-->
+                <!--<img style="height: 100%;width: 100%;border-radius: 5px" th:src="@{/images/banner.jpg}">-->
+                <div class="yongjin" style="height: 140px;border-radius: 5px;background-color: #CCA434;position: relative;display: inline-block;
+    width: 100%;">
+                    <p class="fff" style="margin-top: 20px;text-align: center;font-size: 20px;">历史总佣金</p>
+                    <p style="font-size: 22px;margin-top: 10px;text-align: center;color: #fff;"
+                       class="historyCommission"></p>
+                    <p style="position: absolute;bottom: -10px;width: 100%;background: #fff;height: 40px;border-radius:5px;">
+                        <a class="tgqr" href="#popover"
+                           style="width: 50%;display: inline-block;float: left;text-align: center;margin-top: 10px;border-right: 1px solid #CCA434;">获取推广二维码</a>
+                        <a class="proxy"
+                           style="width: 50%;display: inline-block;float: left;text-align: center;margin-top: 10px;">我的佣金统计</a>
+                    </p>
+                </div>
+
+            </div>
+
+            <!--<div class="mui-card-content">-->
+            <!--<div class="mui-card-content-inner">-->
+            <!--<p class="fff">历史总佣金</p>-->
+            <!--<p style="color: brown; font-family:fantasy;">-->
+            <!--<span style="font-size: 20px;" class="historyCommission"></span>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--<a href="#popover" class="mui-btn mui-btn-primary mui-btn-block">打开弹出菜单</a>-->
+            <!--<div class="mui-card-footer">-->
+            <!--<a href="#popover" class="fff">获取二维码</a>-->
+            <!--<span class="proxy">我的统计</span>-->
+            <!--</div>-->
+        </div>
+        <!---->
+        <!--<div class="title">-->
+        <!--右侧带导航箭头-->
+        <!--</div>-->
+        <ul class="mui-table-view mui-table-view-chevron skin">
+            <li class="mui-table-view-cell mui-media jietu">
+                <a class="tgqr" style=" text-decoration:none;" href="#popover">
+                    <img class="mui-media-object mui-pull-left" th:src="@{/images/newimg/jrzk1.png}">
+                    </button>
+                    <span class="mui-media-object mui-pull-right tg">推广</span>
+                    <span class="mui-media-object mui-pull-right">|</span>
+                    <div class="mui-media-body" style="margin-top: 12px;">
+                        今日状况 &nbsp;&nbsp;&nbsp; + <span class="historyCommissionByTime"></span>
+                        <!--<p class='mui-ellipsis'>''''''''''''''''''''''''</p>-->
+                    </div>
+
+                </a>
+            </li>
+
+            <li class="mui-table-view-cell mui-media proxy">
+                <a id="proxy" style=" text-decoration:none;" href="javascript:;">
+                    <img class="mui-media-object mui-pull-left" th:src="@{/images/newimg/xiaji1.png}"
+                         src="../static/images/jrzk.png">
+                    <span class="mui-media-object mui-pull-right tg">查看</span>
+                    <span class="mui-media-object mui-pull-right">|</span>
+                    <div class="mui-media-body" style="margin-top: 12px;">
+                        我的下级 &nbsp;&nbsp;&nbsp;&nbsp; <span class="proxyCount">0</span>
+                        <!--<p class='mui-ellipsis'>''''''''''''''''''''''''</p>-->
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <div class="mui-content skins">
+            <!--<img style="height: 30px; width: 80%" th:src="@{/images/jz.png}" alt="">-->
+            <h4 style="text-align: center;line-height: 50px;height: 50px;">今日佣金天梯 <span th:each="o,s : ${ods3}"><span
+                    th:if="${o.c_openid} == ${cOpenid}"> NO.[[${s.index} +4]]</span></span></h4>
+            <p style="text-align: center">(截止每晚9点，每日前排行50获取奖励)</p>
+
+            <ul class="mui-table-view mui-grid-view" style="background-color: transparent;">
+                <li class="mui-table-view-cell mui-media mui-col-xs-3" style="margin-left: 15px;">
+                    <a href="#">
+                        <img class="mui-media-object bd50" th:src="${no2.y_upic}">
+                        <div class="mui-media-body cfff">[[${no2.y_nickname}]]</div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media mui-col-xs-4" style="margin-left: 10px;">
+                    <a href="#"><img class="mui-media-object bd50" th:src="${no1.y_upic}"
+                                     src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqqMYKgI1ohHAJj4byYjf1jhT86KvZFgqEiaw0WdckT87QTpmhs2ndME1go5F7kH1ZrniabJt8C0YSA/132">
+                        <div class="mui-media-body cfff">[[${no1.y_nickname}]]</div>
+                    </a>
+                </li>
+
+                <li class="mui-table-view-cell mui-media mui-col-xs-3" style="margin-left: 10px;">
+                    <a href="#">
+                        <img class="mui-media-object bd50" th:src="${no3.y_upic}"
+                             src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqqMYKgI1ohHAJj4byYjf1jhT86KvZFgqEiaw0WdckT87QTpmhs2ndME1go5F7kH1ZrniabJt8C0YSA/132">
+                        <div class="mui-media-body cfff">[[${no3.y_nickname}]]</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="gul" id="vmskin">
+                <li class="mui-table-view-cell mui-media" th:each="order,s : ${ods3}">
+                    <a href="javascript:;" class="">
+                        <img class="gimg" th:src="${order.y_upic}"
+                             src="http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqqMYKgI1ohHAJj4byYjf1jhT86KvZFgqEiaw0WdckT87QTpmhs2ndME1go5F7kH1ZrniabJt8C0YSA/132">
+                        <p class="gimgp">[[${order.y_nickname}]]</p>
+                        <span class="gspan">[[${s.index} +4]]</span>
+                    </a>
+                </li>
+            </ul>
+            <!--<div class="title" style="background:rgba(255,255,255,.1);">-->
+            <!--<br>-->
+            <!--<p style="width: 90%;margin: auto;">1.好友竞猜，获得高达13%币奖励，总共7级。</p>-->
+            <!--<p style="width: 90%;margin: auto;">-->
+            <!--2.代理享有7级金币，在您的邀请下注册为新用户,即可加入你的战队,好友交易后系统实时统计数据,可获得7级分享佣金(佣金按5%,3%,2%,1%,1%,0.5%,0.5%依次获得)依次类推的佣金服务！</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+
+
+    <!-- ------------------------------------->
+    <div id="tabbar-with-yaoqing" class="mui-control-content skin">
+        <img style="width: 100%;height: 100%" th:src="@{/images/newimg/yq3.png}" src="" alt="">
+        <img class="tgqr" style="width: 100%;height: 100%" th:src="@{/images/newimg/yq4.png}" src="" alt="">
+    </div>
+
+    <!-- --------------------  -- - - ---  ------------ -  - - - - - - -  - --->
+    <div id="tabbar-with-map" class="mui-control-content">
+        <!--页面主内容区开始-->
+        <div class="mui-page-content" style="height: 600px;">
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-chevron skin">
+                    <li class="mui-table-view-cell mui-media">
+                        <a class="" href="#account">
+                            <img class="mui-media-object mui-pull-left head-img userpic mt0" id="head-img"
+                                 th:src="@{/images/shuijiao.jpg}" src="../static/images/shuijiao.jpg">
+                            <div class="wd">账号：<span class="mui-media-body nickname"></span></div>
+                            <!--<div class="wd">金额：<span class="mui-media-body money"></span></div>-->
+                        </a>
+                    </li>
+                </ul>
+                <div style="height: 100px">
+                    <div class="mui-content" style="text-align: center">
+                        <ul class="mui-table-view mui-grid-view mui-grid-9 skin" style="background-color:#181818;">
+                            <li id="recharge" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"
+                                style="border: 0px;width: 35%;">
+                                <a href="javascript:void(0)">
+                                    <img th:src="@{/images/newimg/chongzhi.png}" width="25" height="25"
+                                         style="float: left;margin-top: -5px;margin-left: 20px;">
+                                    <!--<span class="mui-icon-extra mui-icon-extra-gold"></span>-->
+                                    <div class="c000">购汇</div>
+                                </a>
+                            </li>
+                            <li id="exchange" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"
+                                style="border: 0px;width: 35%">
+                                <a href="javascript:void(0)">
+                                    <!--<span class="mui-icon-extra mui-icon-extra-prech"></span>-->
+                                    <img th:src="@{/images/newimg/tixian.png}" width="25" height="25"
+                                         style="float: left;margin-top: -5px;margin-left: 20px;">
+                                    <div class="c000">提汇</div>
+                                </a>
+                            </li>
+                            <!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">-->
+                            <!--<span class="mui-icon-extra mui-icon-extra-gift"></span>-->
+                            <!--<div class="mui-media-body">福利</div>-->
+                            <!--</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mui-content carme">
+                    <span class="mui-media-body money" style="position: absolute;top: 27%;left: 23%;"></span>
+                    <ul style="background: transparent;padding-top: 110px;"
+                        class="mui-table-view mui-grid-view mui-grid-9">
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 rechargehistory"><a
+                                href="javascript:void (0)">
+                            <!--<span class="mui-icon mui-icon-home"></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/hgjl.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body ">汇购记录</div>
+                        </a></li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 exchargehistory"><a
+                                href="javascript:void (0)">
+                            <!--<span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/jhjl.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body">结汇记录</div>
+                        </a></li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 history"><a
+                                href="javascript:void (0)">
+                            <!--<span class="mui-icon mui-icon-chatbubble"></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/lsdd.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body">历史订单</div>
+                        </a></li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 novicetips"><a
+                                href="javascript:void (0)">
+                            <!--<span class="mui-icon mui-icon-location"></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/xsxz.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body">新手须知</div>
+                        </a></li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 modelinfo"><a
+                                href="javascript:void (0)">
+                            <!--<span class="mui-icon mui-icon-search"></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/ptjs.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body">平台介绍</div>
+                        </a></li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3 entry"><a href="">
+                            <!--<span class="mui-icon mui-icon-phone"></span>-->
+                            <img style="width: 33px;height: 33px;" th:src="@{/images/newimg/ptrk.png}" src="" alt="">
+                            <div style="color: white" class="mui-media-body">平台入口</div>
+                        </a></li>
+                    </ul>
+                </div>
+
+
+                <!--<ul class="mui-table-view mui-table-view-chevron black">-->
+                <!--<li class="mui-table-view-cell rechargehistory">-->
+                <!--<span class="mui-navigate-right">充值记录</span>-->
+                <!--</li>-->
+                <!--<li class="mui-table-view-cell exchargehistory">-->
+                <!--<span class="mui-navigate-right">提现记录</span>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="mui-table-view mui-table-view-chevron">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="mui-table-view-cell">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="#account" class="mui-navigate-right">兑换记录</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--<li class="mui-table-view-cell history">-->
+                <!--<span class="mui-navigate-right">历史订单</span>-->
+                <!--</li>-->
+                <!--<li class="mui-table-view-cell novicetips">-->
+                <!--<span class="mui-navigate-right">新手须知</span>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="mui-table-view mui-table-view-chevron">&ndash;&gt;-->
+                <!--<li class="mui-table-view-cell modelinfo">-->
+                <!--<span class="mui-navigate-right">平台介绍</span>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="mui-table-view">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="mui-table-view-cell profitmodel">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="mui-navigate-right">盈利模式</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="mui-table-view">&ndash;&gt;-->
+                <!--<li class="mui-table-view-cell entry">-->
+                <!--<span class="mui-navigate-right">平台入口</span>-->
+                <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+
+        <!--页面主内容区结束-->
+    </div>
+</div>
+
+<!--弹出二维码界面-->
+<!-- Small modal -->
+<!--<div id="popover" class="mui-popover" style="height: 83%;width: 88%; border-radius: 5%;">-->
+<!--&lt;!&ndash;<img style="border-radius: 5%;height: 100%;width: 100%;" th:src="@{/images/qr.jpg}">&ndash;&gt;-->
+<!--&lt;!&ndash;<div style="position: absolute;bottom: 10%;left: 31%;" id="qrcodeCanvas"></div>&ndash;&gt;-->
+<!--</div>-->
+<!--结果框-->
+<!--<div id="jsjg"  class="mui-popover" style="height: 90%;width: 76%; border-radius: 8%;position: absolute">-->
+<!--<p style="text-align: center; font-size: 16px; color: white;  width: 100%; border-top-left-radius: 10px;  height: 20%;  background-color: red; border-top-right-radius: 10px;">交易结果</p>-->
+<!--</div>-->
+<p href="javascript:;" style="display: none" class="md-trigger btn btn-primary btn-sm" id="showMe"
+   data-modal="modal-4"></p>
+<div class="md-modal md-effect-2" id="modal-4">
+    <div class="md-content boxs">
+        <h3>交易结果</h3>
+        <div>
+            <ul>
+                <span style="width: 30px;margin-left:17%;color: white;">交易方向:
+                    <span class="jyfx blackcolor" style="color: white;"></span></span> <br>
+                <span style="width: 30px;margin-left:17%;color: white;">购买时间: <span
+                        class="gmsj blackcolor" style="color: white;"></span></span><br>
+                <span style="width: 30px;margin-left: 17%;color: white;">交易周期: 30s</span><br>
+                <span style="width: 30px;margin-left:17%;color: white;">交易价格: <span
+                        class="jyjg blackcolor" style="color: white;"></span></span> <br>
+                <span style="width: 30px;margin-left: 17%;color: white;">最终价格: <span
+                        class="zzjg blackcolor" style="color: white;"></span></span><br>
+                <span style="width: 30px;margin-left: 17%;color: white;">投入: <span
+                        class="tr blackcolor" style="color: white;"></span></span><br>
+                <span style="width: 30px;margin-left:17%;color: white;">返还: <span style="color: white;"
+                                                                                  class="fh blackcolor"></span></span>
+                <br>
+                <span style="width: 30px;margin-left: 17%;color: white;">手续费: 10%</span><br>
+
+            </ul>
+            <button style="margin-left: 38%" class="md-close btn-sm kclose">关闭!</button>
+        </div>
+    </div>
+</div>
+
+<p href="javascript:;" style="display: none" class="md-trigger btn btn-primary btn-sm" id="showMe1"
+   data-modal="modal-1"></p>
+<div class="md-modal md-effect-4" id="modal-1" style="text-align: center;font-size: 20px;color: gold;">
+    <a href="zsjc"
+       style="color: white;padding: 10px 0 10px 0;width: 90%; background-color: #00aeef;border-radius: 15px; display: inline-block; margin-bottom: 5px;">
+        1.走势教程 >>
+    </a>
+    <a href="btjq"
+       style="color: white;padding: 10px 0 10px 0;width: 90%; background-color: #00aeef;border-radius: 15px; display: inline-block; margin-bottom: 5px;">
+        2.倍投教程 >>
+    </a>
+    <a href="tgjc"
+       style="color: white;padding: 10px 0 10px 0;width: 90%; background-color: #00aeef;border-radius: 15px; display: inline-block; margin-bottom: 5px;">
+        3.推广教程 >>
+    </a>
+    <!--<div style="width: 90%;" class="md-content">-->
+    <!--<img style="width: 100%;height: 100%" th:src="@{/images/kf.png}">-->
+    <!--</div>-->
+    <!--<button style="background-color: #87d8c9;width: 90%;text-decoration: none;border: 0px"-->
+    <!--class="md-close btn-sm btn-primary">关闭-->
+    <!--</button>-->
+    <button style="width: 90%;text-decoration: none;border: 0px" class="md-close btn-sm btn-danger">关闭</button>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery.qrcode.min.js}"></script>
+<script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+<script th:src="@{/js/echarts.common.min.js}" src="../static/js/echarts.common.min.js"></script>
+<script th:src="@{/js/myvue.js}"></script>
+<script th:src="@{/js/dynamic.js}"></script>
+<script th:src="@{/js/echarts.js}"></script>
+<script th:src="@{/js/other.js}"></script>
+<script th:src="@{/js/link.js}"></script>
+<script th:src="@{/js/qrcode.js}"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/dialog2/js/classie.js}" src="js/classie.js"></script>
+<script th:src="@{/dialog2/js/modalEffects.js}" src="js/modalEffects.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#vmskin',
+        data: {}
+    })
+
+
+    $('.st1').click(function () {
+        $('#t1').css({"display": "inline-table"});
+        $('#t2').css({"display": "none"});
+    })
+    $('.st2').click(function () {
+        $('#t1').css({"display": "none"});
+        $('#t2').css({"display": "inline-table"});
+    })
+
+    //flag
+    var flag = 'inc';
+
+    //显示购买
+    $('.blockm').on('tap', function () {
+        //方向
+        flag = $(this).attr('flag');
+        $('.goumoney').show();
+    })
+    $('.closex').on('tap', function () {
+        $('.goumoney').hide();
+    })
+
+    //music
+    document.getElementById('notice').play();
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+    //订单
+    //    $('#showMe').click();
+
+    //客服二维码
+    $('#showMe1').click();
+    $("#asd").click(function () {
+        $('#showMe1').click();
+    });
+    //阻止事件冒泡
+    $("#proxy").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".proxy").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".rechargehistory").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".history").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".novicetips").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".exchargehistory").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".modelinfo").on("tap", function (event) {
+        event.stopPropagation();
+    });
+    $(".entry").on("tap", function (event) {
+        event.stopPropagation();
+    });
+
+    $(".tgqr").on("tap", function (event) {
+        event.stopPropagation();
+    });
+
+    // H5 plus事件处理
+    function plusReady() {
+        // 设置系统状态栏样式为深色前景色样式
+        plus.navigator.setStatusBarStyle('dark');
+    }
+
+    //推广二维码
+    $('.tgqr').click(function () {
+        window.location.href = "/cocoker/user/qr?openid=" + getCookie('openid');
+    });
+    if (window.plus) {
+        plusReady();
+    } else {
+        document.addEventListener('plusready', plusReady, false);
+    }
+
+    //当前时间
+    //todaydate
+    function getNowFormatDate() {
+        //获取当前时间
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var strDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+
+    }
+
+    $("#todaydate").text(getNowFormatDate);
+    setInterval(function () {
+        $("#todaydate").text(getNowFormatDate);
+    }, 1000)
+
+
+    window.onload = function () {
+        getTip();
+    }
+
+
+    //获取滚动条
+    function getTip() {
+        $.ajax({
+            url: "/cocoker/tip",
+            method: "get",
+            success: function (result) {
+                if (result.tipMsg != "") {
+
+                    //滚动条
+                    var marquee1 = function (x, y, text) {
+                        // eleId 自己定义的变量名，任意取
+                        // document.createElement ('marquee'); 勿改变
+                        var eleId = document.createElement('marquee');
+                        eleId.style.position = 'absolute';
+                        eleId.style.left = x + 'px';
+                        eleId.style.top = y + 'px';
+                        eleId.innerText = text;
+                        document.body.appendChild(eleId);
+                        $('marquee').css({
+                            "diplay": "inline",
+                            "width": "100%",
+                            "height": "25px",
+                            "line-height": "25px",
+                            "background-color": "rgba(113, 113, 113, 0.6)"
+                        });
+                    }
+
+                    var msg = result.tipMsg;
+                    marquee1(0, 0, msg);
+                    <!-- (x轴,y轴)(150,100) -->
+
+                }
+            }
+        });
+    }
+
+    //字体闪烁
+
+    // function changeColor() {
+    //     var color = "#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+    //     color = color.split("|");
+    //     $('m arquee').css("color", color[parseInt(Math.random() * color.length)]);
+    // $('marquee').css("color","rgb(255, 187, 2)");
+    // }
+    //
+    // setInterval("changeColor()", 500);
+</script>
+</html>

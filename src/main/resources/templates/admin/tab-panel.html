@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+    <style>
+        .curPage {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUri='tab-panel.html')"></div>
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                管理员
+                <!--<small>This is your UI elements section</small>-->
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">管理员</a></li>
+            </ol>
+
+        </div>
+        <div id="page-inner">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            修改密码
+                        </div>
+                    </div>
+
+
+                    <form role="form">
+                        <div class="form-group">
+                            <label>旧密码</label><input type="password" class="form-control" id="oldPwd"/>
+                        </div>
+                        <div class="form-group">
+                            <label>新密码</label><input type="password" class="form-control" id="newPwd1"/>
+                        </div>
+                        <div class="form-group">
+                            <label>确认密码</label><input type="password" class="form-control" id="newPwd2"/>
+                        </div>
+
+                        <button type="button" id="ed" class="btn btn-default">提交</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--提示-->
+            <div class="panel-body">
+                <div class="alert alert-success">
+                    <strong>Well done!</strong> You successfully read this important alert message.
+                </div>
+                <div class="alert alert-info">
+                    <strong>Heads up!</strong> This alert needs your attention, but it's not super
+                    important.
+                </div>
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                </div>
+                <div class="alert alert-danger">
+                    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <footer>
+
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function(){
+        $('#ed').click(function () {
+            if($('#oldPwd').val()=='' || $('#newPwd1').val()=='' || $('#newPwd2').val()==''){
+                alert('请输入');
+                return
+            }
+            if($('#newPwd1').val().length < 6 || $('#newPwd2').val().length < 6){
+                alert('长度6为以上');
+                return
+            }
+            if($('#newPwd1').val() != $('#newPwd2').val()){
+                alert('两次输入密码不一致');
+                return
+            }
+            $.ajax({
+                url: "/cocoker/admin/operation/editAdmin",
+                data: {"oldPwd":$('#oldPwd').val(),"pwd1":$('#newPwd1').val(),"pwd2":$('#newPwd2').val(),"uid":[[${session.admin.yUid}]]},
+                type: "POST",
+                success: function (result) {
+                    if(result.code == 0){
+                        popup({type:'success',msg:"操作成功",delay:1000});
+                    }else{
+                        popup({type:'error',msg:result.msg,delay:2000,bg:true,clickDomCancel:true});
+                    }
+                }
+            })
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+
+    <style>
+        header,.mui-content,body{
+            background-color: #000 !important;
+        }
+        .mui-title,.mui-pull-left,h4{
+            color: #fff;
+        }
+        .newtable{
+            background-color: #000;
+            color: #fff;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+    <!--<a onClick="javascript:history.back(-1);" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <!--<h1 class="mui-title">新手须知</h1>-->
+<!--</header>-->
+<div class="mui-content">
+    <div class="container">
+        <div class="row clearfix" style="padding: 13px;">
+            <h4>新手须知：交易规则 交易时间！！</h4>
+            <div style="text-align: center">
+            <!--<iframe width="80%" height="180px;" src="http://v.qq.com/iframe/player.html?vid=k03611broxh&345&258.75&auto=0" frameborder="0" allowfullscreen></iframe>-->
+            </div>
+            <p>
+                交易时间：<br>
+                美币兑人民币；以上这两种产品可7*24小时不间断交易。<br><br>
+
+                本平台以“$”作为交易单位，每1笔交易为10$，每次交易最少下单10$，最多下单5000$。本平台以“秒”作为结算单位，交割周期分为30秒、60秒、120秒，分别为80% 85% 90%收益
+                <br><br>
+                看涨举例： 美元汇率目前价格为6.6666，您预判30秒后到期价格高于当前价格，下单20$看涨。到期后美元汇率价格为6.6667，您将获得100%的下单收益40币（去掉下单本金20$利润为20$），反之若到期价格为6.6665币低于下单价格，您将损失下单本金。                <br><br>
+                看涨举例： 美元汇率目前价格为6.6666，您预判30秒后到期价格高于当前价格，下单20$看涨。到期后美元汇率价格为6.6665，您将获得100%的下单收益40币（去掉下单本金20$利润为20$），反之若到期价格为6.6667币低于高于价格，您将损失下单本金                <br><br>
+                <br>
+            </p>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    document.getElementById('notice').play();
+
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+</script>
+</html>

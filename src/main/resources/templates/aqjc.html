@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>安全检测...</title>
+</head>
+<body style="background-color: #f4f4f4">
+<div>
+    <img id="coc" style="width: 100%;height: 100%;" th:src="@{images/aqjc.png}">
+</div>
+</body>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+
+    setTimeout(function () {
+    window.location.href = '/cocoker/coc';
+    },700);
+
+    $("#coc").click(function () {
+        window.location.href = '/cocoker/coc';
+    });
+</script>
+</html>

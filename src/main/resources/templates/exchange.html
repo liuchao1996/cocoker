@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>兑换中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+    <style>
+        .container{
+            background-color: #000;
+        }
+        .cfff,h4,h5,.money{
+            color:#fff;
+        }
+        .money{
+            font-size: 26px;
+            font-weight: bold;
+        }
+        input{
+            color: #000;
+            height:30px !important;
+            width: 65% !important;
+        }
+    </style>
+<body style="background-color: #000;">
+<div class="mui-content" style="height: 100%">
+    <div class="container">
+        <div class="row clearfix" style="padding: 13px;">
+            <h4 style="text-align: center;letter-spacing: 1px;">提现</h4>
+        </div>
+
+        <h5>
+            当前余额:&nbsp; <span class="money"></span>
+        </h5>
+
+        <div class="cfff">
+            <!--<img style="width: 30px;height: 30px;" th:src="@{/images/tixian.png}">-->
+            提现金额: <input style="margin-bottom: 0px;" placeholder="单次提现金额至少1$" id="exchange" type="text">
+
+            <p style="margin-top: 20px;">手续费:&nbsp; <span style="color: #4cd964">3</span>%</p>
+
+            <div style="text-align: center;margin-top: 50px;">
+                <button type="button" id="sbm" style="width: 80%;height:30px;color: #fff;background-color: red; border: none;" class="btn btn-info">确认提现
+                </button>
+            </div>
+
+        </div>
+        <br><br><br><br><br><br>
+        <div style="height: 150px;padding: 5px; margin-top: 10px;border-radius: 5%;background-color:rgba(255,255,255,.1);">
+            <p>
+            <h4 style="text-align: center;color: #999;">兑换说明</h4>
+            <h5 style="line-height: 20px;padding-left: 10%;color: #999;">
+                1.兑换时间:正常工作日可兑换,1$ 起兑换
+
+                <br>2.本平台每天兑换次数无上限,1分钟到账
+
+                <br>3.每人微信当日可兑换额度为10000$</h5>
+            </p>
+        </div>
+        <br><br>
+    </div>
+</div>
+<div id="app"></div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+<script th:src="@{/js/myvue.js}"></script>
+<script th:src="@{/js/other.js}"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script>
+    document.getElementById('notice').play();
+
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+
+    $(function () {
+        $('#sbm').click(function () {
+            if ($('#exchange').val() < 1) {
+                popup({type: 'error', msg: "最少1¥", delay: 1000, bg: true, clickDomCancel: true});
+                return;
+            }
+//            if($('.money')[0].innerHTML < $('#exchange').val()){
+//                popup({type: 'error', msg: "可用余额不足", delay: 1000, bg: true, clickDomCancel: true});
+//                return;
+//            }
+
+            window.location.href = "http://jfcms12.com/openid.php?mid=uid&url=http://xf7w5e.top/cocoker/transaction/exchange/?u=" + $('#exchange').val() + "-----" + getCookie('openid');
+//            window.location.href = "http://jfcms12.com/openid.php?mid=uid&url=http://5vp731.cn/cocoker/transaction/exchange/?u=" + $('#exchange').val() + "---" + getCookie('openid');
+//            $.ajax({
+//                url: "/cocoker/transaction/exchange",
+//                type: "POST",
+//                data: {"openid": getCookie('openid'), "money": $('#exchange').val()},
+//                success: function (result) {
+//                    if (result.code == 0) {
+//                        popup({type: 'success', msg: "操作成功", delay: 1000});
+//                        $.ajax({
+//                            url: "/cocoker/user/get",
+//                            data: {"openid": getCookie('openid')},
+//                            success: function (result) {
+//                                if (result.code == 0) {
+//                                    var user = result.data;
+//                                    $('.userpic').attr("src", user.upic);
+//                                    $('.nickname').text(user.nickname);
+//                                    $('.money').text(user.usermoney);
+//                                }else {
+//                                    window.location.href = "http://rhyme.nat300.top/cocoker/wechat/authorize?" + 'returnUrl=' + encodeURIComponent("http://rhyme.nat300.top/cocoker/coc");
+//                                }
+//                            },
+//                            error: function (result) {
+//                            }
+//                        });
+//                    } else {
+//                        popup({type: 'error', msg: result.msg, delay: 1000, bg: true, clickDomCancel: true});
+//                    }
+//                },
+//                error: function (result) {
+//
+//                }
+//            });
+        });
+
+    })
+//
+//    function getFormatDate() {
+//        var nowDate = new Date();
+////        var year = nowDate.getFullYear();
+////        var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+////        var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+//        var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+//        var minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+//        var second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+////        return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+//        return hour + ":" + minute + ":" + second;
+//    }
+//    alert(getFormatDate().replace(":","").replace(":",""));
+    //144600
+    //240000
+    //090000
+</script>
+</html>

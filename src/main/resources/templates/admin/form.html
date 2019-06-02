@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+    <style>
+        .curPage {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUri='form.html')"></div>
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                查询用户详情
+                <!--<small>This is your UI elements section</small>-->
+            </h1>
+            <!--<ol class="breadcrumb">-->
+            <!--<li><a href="#"></a></li>-->
+            <!--</ol>-->
+
+        </div>
+        <div id="page-inner">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            查询用户详情
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>请输入用户id!</strong>
+                    </div>
+                    <div class="form-group">
+                        <input placeholder="输入ID" type="text" class="form-control" id="uid"/>
+                    </div>
+                    </form>
+                    <button class="btn btn-success cmt">查询</button>
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <footer>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr style="font-size: 12px;">
+                                <th>
+                                    数量
+                                </th>
+                                <th>
+                                    剩余
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    时间
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="rechargeinfo">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function () {
+        $('.cmt').click(function () {
+            if ($('#uid').val() == '') {
+                popup({type: 'error', msg: "输入id", delay: 1000, bg: true, clickDomCancel: true});
+                return;
+            }
+            $.ajax({
+                url: "/cocoker/admin/operation/userInfo/" + $('#uid').val(),
+                type: "POST",
+                success: function (result) {
+                    //清除之前结果
+                    $('#rechargeinfo').empty();
+
+                    if (result.code == 0) {
+                        popup({type: 'success', msg: "操作成功", delay: 1000});
+                        var recharges = result.data.recharges;
+                        $.each(recharges, function (index, item) {
+                            var moneyTd = $("<td></td>").append(item.tmoney);
+                            var yueTd = $("<td></td>").append(item.tyue);
+                            var statusTd = $("<td></td>").append(item.tstatus == 0 ? "失败" : "成功");
+                            var createTimeTd = $("<td></td>").append(item.createTime);
+                            $("<tr></tr>").append(moneyTd).append(yueTd).append(statusTd).append(createTimeTd).appendTo('#rechargeinfo');
+                        })
+
+                    } else {
+                        popup({type: 'error', msg: result.msg, delay: 1000, bg: true, clickDomCancel: true});
+                    }
+                },
+                error: function (result) {
+                    alert('没找到用户');
+                }
+            })
+        });
+
+    });
+</script>
+
+</body>
+</html>

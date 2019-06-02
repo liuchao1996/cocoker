@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+          href="assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUrl='index.html')"></div>
+
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                主页
+                <small>Welcome <span th:if="${session.admin == null}" th:text="空"></span> <span th:if="${session.admin != null}" th:text="${session.admin.YUsername}"></span></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">主页</a></li>
+                <!--<li><a href="#">Dashboard</a></li>-->
+                <!--<li class="active">Data</li>-->
+            </ol>
+
+        </div>
+        <div id="page-inner">
+
+            <!-- /. ROW  -->
+
+            <div class="row">
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="board">
+                        <div class="panel panel-primary">
+                            <div class="number">
+                                <h3>
+                                    <h3>[[${allMoney}]]</h3>
+                                    <small>总余额</small>
+                                </h3>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-eye fa-5x red"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="board">
+                        <div class="panel panel-primary">
+                            <div class="number">
+                                <h3>
+                                    <h3>[[${dayAllMoney}]]</h3>
+                                    <small>今日充值</small>
+                                </h3>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-shopping-cart fa-5x blue"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="board">
+                        <div class="panel panel-primary">
+                            <div class="number">
+                                <h3>
+                                    <h3>[[${dayAllDecMoney}]]</h3>
+                                    <small>今日提现</small>
+                                </h3>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-comments fa-5x green"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="board">
+                        <div class="panel panel-primary">
+                            <div class="number">
+                                <h3>
+                                    <h3>[[${allUserCount}]]</h3>
+                                    <small>用户总数</small>
+                                </h3>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-user fa-5x yellow"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--table-->
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                头像
+                            </th>
+                            <th>
+                                用户名
+                            </th>
+                            <th>
+                                余额
+                            </th>
+                            <th>
+                                创建时间
+                            </th>
+                            <th>
+                                修改时间
+                            </th>
+                            <th>
+                                状态
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user: ${users}">
+                            <td>
+                                [[${user.yUid}]]
+                            </td>
+                            <td>
+                                <img style="height: 30px; height: 30px;" th:src="${user.yUpic}" alt="">
+                            </td>
+                            <td>
+                                [[${user.yNickname}]]
+                            </td>
+                            <td>
+                                [[${user.yUsermoney}]]
+                            </td>
+                            <td>
+                                [[${user.yCreatetime}]]
+                            </td>
+                            <td>
+                                [[${user.yUpdatetime}]]
+                            </td>
+                            <td>
+                                [[${user.yUstatus}]]
+                            </td>
+                            <td>
+                                <!--<a th:href="@{'/admin/ui-elements?page=' + ${i} + '&size=10'}"-->
+                                <button th:lock="@{${user.yUid}}" type="button" class="btn btn-success btn-xs lock">禁用</button>
+                                <button th:unlock="@{${user.yUid}}" type="button" class="btn btn-danger btn-xs unlock">解禁</button>
+                                <a th:href="@{'/admin/operation/delUser?id='+${user.yUid}}" type="button" class="btn btn-danger btn-xs">删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--分页条-->
+            <div class="row clearfix pull-right">
+                <div class="col-md-12 column">
+                    <ul class="pagination">
+                        <li>
+                            <a href="/cocoker/admin/index?page=0&size=10">1</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=1&size=10">2</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=2&size=10">3</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=3&size=10">4</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=4&size=10">5</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=5&size=10">6</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=6&size=10">7</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=7&size=10">8</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=8&size=10">9</a>
+                        </li>
+                        <li>
+                            <a href="/cocoker/admin/index?page=9&size=10">10</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <footer>
+
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Morris Chart Js -->
+<script th:src="@{/assets/js/morris/raphael-2.1.0.min.js}" src="assets/js/morris/raphael-2.1.0.min.js"></script>
+<script th:src="@{/assets/js/morris/morris.js}" src="assets/js/morris/morris.js"></script>
+
+
+<script th:src="@{/assets/js/easypiechart.js}" src="assets/js/easypiechart.js"></script>
+<script th:src="@{/assets/js/easypiechart-data.js}" src="assets/js/easypiechart-data.js"></script>
+
+<script th:src="@{/assets/js/Lightweight-Chart/jquery.chart.js}"
+        src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<!-- Chart Js -->
+<script type="text/javascript" th:src="@{/assets/js/Chart.min.js}" src="assets/js/Chart.min.js"></script>
+<script type="text/javascript" th:src="@{/assets/js/chartjs.js}" src="assets/js/chartjs.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+/*
+
+$('#success').click(function(){
+   popup({type:'success',msg:"操作成功",delay:1000,callBack:function(){
+	  console.log('callBack~~~');
+   }});
+})
+$('#error').click(function(){
+   popup({type:'error',msg:"操作失败",delay:2000,bg:true,clickDomCancel:true});
+})
+$('#load').click(function(){
+   popup({type:'load',msg:"请等待",delay:1500,callBack:function(){
+	  popup({type:"success",msg:"加载成功",delay:1000});
+   }});
+})
+$('#tip').click(function(){
+   popup({type:'tip',msg:"提示信息",delay:null});
+})
+ */
+    $(function () {
+        //禁用
+        $(".lock").on("click",function(){
+            $.ajax({
+                url:"/cocoker/admin/operation/lock/"+$(this).attr("lock"),
+                type: "POST",
+                success: function (result) {
+                    if(result.code == 0){
+                        popup({type:'success',msg:"操作成功",delay:1000});
+                    }else{
+                        popup({type:'error',msg:result.msg,delay:2000,bg:true,clickDomCancel:true});
+                    }
+                }
+            });
+        });
+        //解除禁用
+        $(".unlock").on("click",function(){
+            $.ajax({
+                url:"/cocoker/admin/operation/unlock/"+$(this).attr("unlock"),
+                type: "POST",
+                success: function (result) {
+                    if(result.code == 0){
+                        popup({type:'success',msg:"操作成功",delay:1000});
+                    }else{
+                        popup({type:'error',msg:result.msg,delay:2000,bg:true,clickDomCancel:true});
+                    }
+                }
+            });
+        });
+    })
+</script>
+</body>
+
+</html>

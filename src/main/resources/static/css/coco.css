@@ -1,0 +1,43 @@
+
+.headerdiv{
+    width: 100%;
+    height: 70px;
+}
+.userpic{
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.active .mui-spinner-indicator {
+    background: #007AFF;
+}
+.mui-content a {
+    color: #8F8F94;
+}
+
+.mui-content a.active {
+    color: #007aff;
+}
+.btnsdiv {
+    background-color:#a6e1ec !important;
+}
+.infospan{
+    width: 48px; height: 33px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: block;
+}
+* {
+    touch-action: pan-y;
+    font-size: 14px;
+}
+
+.btndiv button {
+    width: 55px;
+    height: 33px;
+    margin-bottom: 2px;
+    background-color: #75b8cc;
+}
+a{text-decoration:none;}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active,.mui-table-view-cell>a:not(.mui-btn).mui-active {
+    background-color: transparent;
+}

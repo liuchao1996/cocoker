@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+    <style>
+        header,.mui-content,body{
+            background-color: #000 !important;
+        }
+        .mui-title,.mui-pull-left,h4,th,td{
+            color: #fff;
+        }
+        .newtable{
+            background-color: #000;
+            color: #fff;
+        }
+        th{
+            text-align: center;
+        }
+        .table>thead>tr>th,.table>tbody>tr>td{
+            padding: 0;
+            text-align: center;
+            padding-top: 5px;
+        }
+        table{
+            margin-top: 20px;
+        }
+        td{
+            border:1px solid #999;
+            line-height: 20px;
+        }
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+    </style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a onClick="javascript:history.back(-1);" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">历史记录</h1>
+</header>
+<div class="mui-content">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-hover">
+                    <thead>
+                    <tr style="font-size: 12px;">
+                        <th>
+                            下单时间
+                        </th>
+                        <th>
+                            方向
+                        </th>
+                        <th>
+                            指数
+                        </th>
+                        <th>
+                            最终指数
+                        </th>
+                        <th>
+                            元
+                        </th>
+                        <th>
+                            结果
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${orders.size() == 0}">
+                        <td colspan="6" style="text-align: center">
+                            订单为空
+                        </td>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <span th:if="${order.result} == '盈'">
+                        <!--<td th:text="${#dates.format(order.createTime,'yyyy-mm-dd hh:mm:ss')}">-->
+                        <td style="" th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                        </td>
+                        <td th:class="${order.direction}=='看涨'?'red':'green'">
+                            BTC <br> [[${order.direction}]]
+                        </td>
+                        <td>
+                            [[${order.oindex}]]
+                        </td>
+                        <td th:class="${order.oindex} < ${order.ofinal} ?'red':'green'">
+                            [[${order.ofinal}]]
+                        </td>
+                        <td>
+                            [[${order.money}]]
+                        </td>
+                        <td style="color: red">
+                            [[${order.result}]]
+                        </td>
+                        </span>
+                        <span th:if="${order.result} != '盈'">
+                        <!--<td th:text="${#dates.format(order.createTime,'yyyy-mm-dd hh:mm:ss')}">-->
+                        <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                        </td>
+                        <td th:class="${order.direction}=='看涨'?'red':'green'">
+                            BTC <br>[[${order.direction}]]
+                        </td>
+                        <td>
+                            [[${order.oindex}]]
+                        </td>
+                        <td th:class="${order.oindex} <${order.ofinal} ?'red':'green'">
+                            [[${order.ofinal}]]
+                        </td>
+                        <td>
+                            [[${order.money}]]
+                        </td>
+                        <td class="green">
+                            [[${order.result}]]
+                        </td>
+                        </span>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    document.getElementById('notice').play();
+
+
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+</script>
+</html>

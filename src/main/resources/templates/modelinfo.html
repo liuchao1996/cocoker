@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+    <style>
+        header,.mui-content,body{
+            background-color: #000 !important;
+        }
+        .mui-title,.mui-pull-left,h4{
+            color: #fff;
+        }
+        .newtable{
+            background-color: #000;
+            color: #fff;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+    <!--<a onClick="javascript:history.back(-1);" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <!--<h1 class="mui-title">平台介绍</h1>-->
+<!--</header>-->
+<div class="mui-content">
+    <div class="container">
+        <div class="row clearfix" style="padding: 13px;">
+            <h4> 平台介绍：什么是币圈财经？</h4><br>
+            <p>
+                1.什么是美元汇率？<br>
+                只判断涨跌即可赚钱，最快30秒完成交易，每笔收益最高可达90%，小投入大回报！ 可选择判比特币或者另外3种产品合约最快30秒后的涨跌情况，只要涨跌方向判断 正确，30秒即可获得高达80%的投资收益，快速、安全、高效、透明。<br>
+                <br>
+                2.美元汇率就是猜大小？<br>
+                看起来美元汇率就像是猜大小，但猜大小的概率是各50%，而美元汇率我们 是可以透过技术分析、基本面、走势图分析让胜率达到70%以上，甚至更高，所以本质上来说 是不一样的。                <br><br>
+                3.美元汇率是否可能被操控？<br>
+                平台产品跟国际市场价格波动是一致的
+                如果不跟国际市场上的价格波动一致
+                平台是不可能允许在微信官方认证公众号运营的
+                平台是有正规资质才能在公众号运营的
+                国际大宗商品现货市场及国际外汇市场的交易量巨大，例如外汇市场目前日交易量 达到了5万亿美元的级别，这只是日交易量。在如此大的交易量面前几乎没有任何政府 、机构可以操纵市场，美元汇率又是极短线的交易，所以几乎是不可能有任何机构、 政府可以操控的。
+                <br><br>
+                4.微信支付:第三方资金监管 <br>
+                充值、兑换等资金流水均由微信支付第三方操作。
+                您充值兑换的钱都是交给微信支付平台监管，充值、兑换秒到账。
+                方便快捷，放心，我们很安全。
+                <br><br>
+                5.投资有风险，入行需谨慎。<br>
+                凡是投资类项目，在获得较高收益的同时，也伴有风险。请大家合理投资，健康投资，币圈财经祝大家投资愉快，生活愉快！
+            </p>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    document.getElementById('notice').play();
+
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+</script>
+</html>

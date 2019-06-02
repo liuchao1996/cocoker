@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="webthemez" name="author"/>
+    <title>后台管理</title>
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/assets/css/bootstrap.css}" href="assets/css/bootstrap.css" rel="stylesheet"/>
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/assets/css/font-awesome.css}" href="assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link th:href="@{/assets/css/custom-styles.css}" href="assets/css/custom-styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" th:href="@{/dialog/style/dialog.css}" href="style/dialog.css">
+
+    <style>
+        .curPage {
+            color: red !important;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--topbar-->
+    <div th:replace="admin/commons/header :: topbar"></div>
+
+    <!--sidebar-->
+    <div th:replace="admin/commons/header :: sidebar(activeUri='table.html')"></div>
+    <div id="page-wrapper">
+        <div class="header">
+            <h1 class="page-header">
+                数据管理
+                <!--<small>This is your UI elements section</small>-->
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#">数据管理</a></li>
+            </ol>
+
+        </div>
+        <div id="page-inner">
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Echarts图
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger">
+                        <strong>注意!</strong> 每天凌晨清除上一天的数据
+                    </div>
+                    <a href="/cocoker/admin/operation/cleanEcharts" class="btn btn-danger">清除数据</a>
+                    <hr>
+                    <div class="alert alert-success">
+                        <strong>注意!</strong> 只能设置一次，设置后2分钟见效
+                    </div>
+                    <a href="/cocoker/admin/operation/setEchartsDatas" class="btn btn-success">设置数据</a>
+
+                    <hr>
+                    <div class="alert alert-success">
+                        <strong>修改首页最上方提示信息!</strong>
+                    </div>
+                    <input id="setMsgText" type="text" placeholder="请输入新的提示信息">
+                    <a id="setMsg" class="btn btn-success">设置提示</a>
+                </div>
+            </div>
+
+            <!-- /. ROW  -->
+            <footer>
+
+            </footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script th:src="@{/assets/js/jquery-1.10.2.js}" src="assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script th:src="@{/assets/js/bootstrap.min.js}" src="assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script th:src="@{/assets/js/jquery.metisMenu.js}" src="assets/js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script th:src="@{/assets/js/custom-scripts.js}" src="assets/js/custom-scripts.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/dialog/javascript/zepto.min.js}" src="javascript/zepto.min.js"></script>
+<script th:src="@{/dialog/javascript/dialog.min.js}" type="text/javascript" src="javascript/dialog.min.js"></script>
+<script th:src="@{/webjars/jquery/3.1.1/jquery.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("#setMsg").click(function () {
+            $.ajax({
+                url: '/cocoker/admin/operation/settip',
+                data: {"msg":$('#setMsgText').val()},
+                method: "post",
+                success: function (result) {
+                    alert(result);
+                }
+            })
+            return false;
+        })
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+    <style>
+        header,.mui-content,body{
+            background-color: #000 !important;
+        }
+        .mui-title,.mui-pull-left,h4{
+            color: #fff;
+        }
+        .newtable{
+            background-color: #000;
+            color: #fff;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+    <!--<a onClick="javascript:history.back(-1);" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <!--<h1 class="mui-title">平台入口</h1>-->
+<!--</header>-->
+<div class="mui-content">
+    <div class="container">
+        <div class="row clearfix" style="padding: 13px;">
+        <h4>大牛都有设置公众号置顶功能，这个你知道吗？</h4><br><br>
+        <p>设置“置顶功能”这意味着你不必再去满屏幕的小红点中寻找我们的平台公众号，能够更方便随时随地打开公众号登录平台进行操作！
+            <br><br>
+            1.打开您关注后的微信公众号，然后点击右上角的标志，如下图：
+        </p>
+            <img style="width: 100%;height: 100%;" th:src="@{/images/3.jpg}"><br><br>
+            <p>2.打开公众主页后点击右上角到设置界面</p>
+            <img style="width: 100%;height: 100%;" th:src="@{/images/1.jpg}"><br><br>
+            <!--<p>3.打开之后，你点击右边灰色置顶公众号这个按钮，成为置顶微信公众号之后，灰色按钮会变成绿色!</p>-->
+            <!--<img style="width: 100%;height: 100%;" th:src="@{/images/2.png}">-->
+
+            <p>3.返回首页，您就会发现你关注的公众号会出现在最前面，这样您就不会找不到公众号，也能更方便您在公众号操作。
+                <br><br>
+                4.点击“登录入口”可以直接进入首页，如有疑问可以点击公众号下方的专属客服进行咨询。</p>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    document.getElementById('notice').play();
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>财神到</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" href="../static/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coco.css}" href="../static/css/coco.css"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/cocoker/css/icons-extra.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script th:src="@{/js/mui.min.js}" src="../static/js/mui.min.js"></script>
+
+    <style>
+        header,.mui-content,body{
+            background-color: #000 !important;
+        }
+        .mui-title,.mui-pull-left{
+            color: #fff;
+        }
+        .newtable{
+            background-color: #000;
+            color: #fff;
+        }
+        th{
+            text-align: center;
+        }
+        .table>tbody>tr>td{
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a onClick="javascript:history.back(-1);" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">充值记录</h1>
+</header>
+
+<div class="mui-content">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column newtable">
+                <table class="table">
+                <thead>
+                    <tr style="font-size: 12px;">
+                        <th>
+                            数量
+                        </th>
+                        <th>
+                            剩余
+                        </th>
+                        <th>
+                            状态
+                        </th>
+                        <th>
+                            时间
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${recharges.size() == 0}">
+                        <td colspan="6" style="text-align: center">
+                            订单为空
+                        </td>
+                    </tr>
+                    <tr th:each="recharge : ${recharges}">
+                        <span th:if="${recharge.tstatus==1}">
+                            <td>
+                            [[${recharge.tmoney}]]
+                        </td>
+                        <td>
+                            [[${recharge.tyue}]]
+                        </td>
+                        <td>
+                            [[${recharge.tstatus}== '1' ? '成功':'失败']]
+                        </td>
+                        <td th:text="${#dates.format(recharge.createTime,'dd - hh:mm:ss')}">
+                        </td>
+                        </span>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--音乐-->
+<audio id="notice" loop="loop">
+    <source src="/cocoker/mp3/song.mp3" type="audio/mpeg">
+</audio>
+</body>
+<script>
+    document.getElementById('notice').play();
+
+    mui.init({
+        swipeBack: true //启用右滑关闭功能
+    });
+</script>
+</html>
