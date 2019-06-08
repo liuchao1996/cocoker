@@ -24,11 +24,11 @@ import static org.junit.Assert.*;
  * @CreateDate: 2019/1/4 12:20 PM
  * @Version: 1.0
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+/*@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)*/
 public class CocokerApplicationTest {
 
-    @Test
+    //@Test
     public void contextLoads() {
 //        System.out.println(MD5.md5("1234567890abcdefghijklmnopqrstuvwxyz", ""));
         DecimalFormat df = new DecimalFormat("#.00");
@@ -37,7 +37,7 @@ public class CocokerApplicationTest {
     }
 
 
-    @Test
+    //@Test
     public void testDate(){
         Date time = DateUtil.getTime(01, 00, 00);
         System.out.println(time);

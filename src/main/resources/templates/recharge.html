@@ -80,35 +80,34 @@
         </div>
         <h6 class="xzcz">选择充值金额</h6>
         <div class="mui-content-padded btndiv2" style="text-align: center;">
-
-            <button type="button" class="btn btn-default" value="10"><span></span>10</button>
-            <button type="button" class="btn btn-default btnsdiv2 my" check="check" value="20"><span aria-hidden="true"
-                                                                                                     style="font-size: 10px;"></span>20
+            <button type="button" class="btn btn-default"><span>$&nbsp;</span>5</button>
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>10
             </button>
-            <button type="button" class="btn btn-default" value="30"><span aria-hidden="true"
-                                                                           style="font-size: 10px;"></span>30
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>15
             </button>
-            <button type="button" class="btn btn-default" value="50"><span aria-hidden="true"
-                                                                           style="font-size: 10px;"></span>50
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>20
             </button>
-            <button type="button" class="btn btn-default" value="100"><span aria-hidden="true"
-                                                                            style="font-size: 10px;"></span>100
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>30
             </button>
-            <button type="button" class="btn btn-default" value="200"><span aria-hidden="true"
-                                                                            style="font-size: 10px;"></span>200
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>50
             </button>
-            <button type="button" class="btn btn-default" value="300"><span aria-hidden="true"
-                                                                            style="font-size: 10px;"></span>300
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>80
             </button>
-            <button type="button" class="btn btn-default" value="500"><span aria-hidden="true"
-                                                                            style="font-size: 10px;"></span>500
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>90
             </button>
-            <button type="button" class="btn btn-default" value="1000"><span aria-hidden="true"
-                                                                             style="font-size: 10px;"></span>1000
+            <button type="button" class="btn btn-default"><span aria-hidden="true"
+                                                                style="font-size: 10px;">$&nbsp;</span>100
             </button>
         </div>
-        <!--<p style="text-align: center">当前汇率: <span class="c1"></span></p>
-        <p style="text-align: center">需支付: <span class="c2">67.9</span></p>-->
+        <p style="text-align: center">当前汇率: <span class="c1"></span></p>
+        <p style="text-align: center">需支付: <span class="c2">67.9</span></p>
         <div style="text-align: center">
             <!--<button type="button" style="width: 80%;height:30px;color: #fff;background-color: red; border: none;" class="btn btn-info transaction">立即支付</button>-->
             <img class=" transaction" style="height: 40%;width: 80%; margin: 5% 0px;" th:src="@{/images/ligh.png}"
@@ -125,7 +124,7 @@
     <!--</h6>-->
     <!--</div>-->
     <div style="text-align: center">
-        <img style="height: 40%;width: 80%; margin: 5% 0px;" th:src="@{/images/hgxz2.png}" src="" alt=""></div>
+        <img style="height: 40%;width: 80%; margin: 5% 0px;" th:src="@{/images/hgxz.png}" src="" alt=""></div>
     <br>
 </div>
 </div>
@@ -167,7 +166,6 @@
                 $('.userpic').attr("src", user.upic);
                 $('.nickname').text(user.nickname)
                 $('.money').text(user.usermoney)
-                //location.href = "/cocoker/coc";
             }
         },
         error: function (result) {
@@ -177,8 +175,6 @@
     $('.btndiv2 button').click(function () {
         $('.btndiv2 button').removeAttr("check").removeClass('btnsdiv2');
         $(this).attr("check", "check").addClass('btnsdiv2');
-        $(".btndiv2 button").removeClass("my");
-        $(this).addClass("my");
         $(".c2").text(this.innerText.substring(2) * 6.79);
     });
 
@@ -195,7 +191,7 @@
 
         //设置值
         $("#openid").val(getCookie('openid'));
-        $("#money").val($('.my').attr("value"));
+        $("#money").val($('.btndiv2 button[check=check]')[0].innerText.substring(2));
         //发起请求
         $("#transactionForm").attr("action", "/cocoker/transaction/recharge").submit();
         //改变颜色
